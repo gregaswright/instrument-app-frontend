@@ -1,11 +1,14 @@
 import React from 'react'
 import NavBar from '../component/NavBar'
+import {Button, ButtonToolbar} from 'react-bootstrap'
+import InstrumentModal from '../component/InstrumentModal'
 // import ListingContainer from './container/ListingContainer'
 
 class MainContainer extends React.Component {
 
     state = {
-        listingArray: []
+        listingArray: [],
+        addModalShow: false
     }
 
     componentDidMount(){
@@ -15,10 +18,16 @@ class MainContainer extends React.Component {
     }
 
     render() {
-        console.log(this.state.listingArray)
+        let addModalClose = () => this.setState({ addModalShow: false })
         return (
             //the nav bar is going to hold the render functions
-            <NavBar />
+            <div>
+                <NavBar />
+                <ButtonToolbar>
+                    <Button variant='primary' onClick={() => this.setState({addModalShow: true})}>Add Listing</Button>
+                    <InstrumentModal show={this.state.addModalShow} onHide={addModalClose}></InstrumentModal>
+                </ButtonToolbar>
+            </div>
         )
     }
 }
