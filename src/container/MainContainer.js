@@ -12,21 +12,19 @@ class MainContainer extends React.Component {
     }
 
     componentDidMount(){
-        fetch('http://localhost:3000/api/v1/listings/1')
+        fetch('http://localhost:3000/api/v1/listings/')
             .then(response => response.json())
             .then(listingData => this.setState({ listingArray: listingData}))
     }
 
     render() {
         let addModalClose = () => this.setState({ addModalShow: false })
+        console.log(this.state.listingArray)
         return (
-            //the nav bar is going to hold the render functions
             <div>
                 <NavBar />
-                <ButtonToolbar>
                     <Button variant='primary' onClick={() => this.setState({addModalShow: true})}>Add Listing</Button>
-                    <InstrumentModal show={this.state.addModalShow} onHide={addModalClose}></InstrumentModal>
-                </ButtonToolbar>
+                    <InstrumentModal show={this.state.addModalShow} onHide={addModalClose} />
             </div>
         )
     }
