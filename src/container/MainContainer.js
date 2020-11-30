@@ -1,4 +1,5 @@
 import React from 'react'
+import NavBar from '../component/NavBar'
 // import ListingContainer from './container/ListingContainer'
 
 class MainContainer extends React.Component {
@@ -9,15 +10,16 @@ class MainContainer extends React.Component {
 
     componentDidMount(){
         fetch('http://localhost:3000/api/v1/listings/1')
-  .then(response => response.json())
-  .then(listingData => this.setState({ listingArray: listingData}));
+            .then(response => response.json())
+            .then(listingData => this.setState({ listingArray: listingData}))
     }
 
     render() {
         console.log(this.state.listingArray)
         return (
-            <h4>Stuff</h4>
-        );
+            //the nav bar is going to hold the render functions
+            <NavBar />
+        )
     }
 }
 
