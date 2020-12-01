@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
 import { MenuItems } from "./MenuItems"
 import { Button } from "./Button"
+import Signup from "./Signup"
 import './NavBar.css'
 
 class Navbar extends Component {
-    state = { clicked: false }
+    state = { 
+        barsClick: false,
+        signupClick: false
+    }
 
     handleClick = () => {
-        this.setState({ clicked: !this.state.clicked })
+        this.setState({ barsClicked: !this.state.barsClick })
+    }
+
+    handleSignupClick = () => {
+        this.setState({signupClick: !this.state.signupClick})
     }
 
     render() {
@@ -15,16 +23,17 @@ class Navbar extends Component {
             <nav className="NavbarItems">
                 <h1 className="navbar-logo">Instruments<i className="fas fa-music"></i></h1>
                 <div className="menu-icon" onClick={this.handleClick}>
-                    <i className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
+                    <i className={this.state.barsClick ? 'fas fa-times' : 'fas fa-bars'}></i>
                 </div>
-                <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
+                <ul className={this.state.barsClick ? 'nav-menu active' : 'nav-menu'}>
                     {MenuItems.map((item, index) => {
                         return (
                             <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
                         )
                     })}
                 </ul>
-                <Button>Sign Up</Button>
+                <Button onClick={this.handleSignupClick}>Sign Up</Button>
+                {this.state.signupClick ? <Signup signupHandler={this.props.signupHandler}/> : null}
             </nav>
         )
     }
