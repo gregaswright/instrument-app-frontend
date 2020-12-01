@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card } from 'semantic-ui-react'
 import ListingCard from '../component/ListingCard'
 
 export default class ListingContainer extends React.Component {
@@ -23,14 +24,15 @@ export default class ListingContainer extends React.Component {
             used={listing.used}
             price={listing.price}
             img={listing.img}
+            username={listing.user.username}
             />)
     }
 
     render() {
         return(
-            <div className="listing-container">
+            <Card.Group itemsPerRow={2}>
                 {this.renderListing()}
-            </div>
+            </Card.Group>
         )
     }
 }
