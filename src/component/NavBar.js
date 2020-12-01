@@ -35,6 +35,20 @@ class Navbar extends Component {
         )
     }
 
+    renderNavItems = () => {
+        MenuItems.map((item, index) => {
+            return (
+                <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
+            )
+        })
+    }
+
+    renderSingleNavItem = () => {
+        return(
+            <li><a className={MenuItems[0].cName} href={MenuItems[0].url}>{MenuItems[0].title}</a></li>
+        )
+    }
+
     render() {
         return(
             <nav className="NavbarItems">
@@ -49,7 +63,7 @@ class Navbar extends Component {
                         )
                     })}
                 </ul>
-                {this.props.user ? <Button onClick={this.props.logOutHandler}>Log Out</Button> : this.renderButtons()}
+                { this.props.user ? <Button onClick={this.props.logOutHandler}>Log Out</Button> : this.renderButtons() }
                 
             </nav>
         )
