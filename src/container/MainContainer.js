@@ -4,7 +4,7 @@ import NavBar from '../component/NavBar'
 import {Button, ButtonToolbar} from 'react-bootstrap'
 import InstrumentModal from '../component/InstrumentModal'
 import ListingContainer from './ListingContainer'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import FavoriteCard from '../component/FavoriteCard'
 import ListedInstrumentCard from '../component/ListedInstrumentCard'
 
@@ -25,7 +25,7 @@ class MainContainer extends React.Component {
             .then(resp => resp.json())
             .then(data => this.setState({ user: data.user }))
         } else {
-            // this.props.history.push("/listings")
+            this.props.history.push("/listings")
         }
     }
 
@@ -53,15 +53,15 @@ class MainContainer extends React.Component {
         })
         .then(response => response.json())
         .then(console.log)
-        // .then(data => {
-        //   localStorage.setItem("token", data.jwt)
-        //   this.setState({ user: data.user }, () => this.props.history.push("")))
-        // }
+        .then(data => {
+            localStorage.setItem("token", data.jwt)
+            this.setState({ user: data.user }, () => this.props.history.push("/listings"))
+        })
     }
 
     logOutHandler = () => {
         localStorage.removeItem("token")
-        this.props.history.push("/login")
+        this.props.history.push("/listings")
         this.setState ({user: null})
     }
 
@@ -77,7 +77,7 @@ class MainContainer extends React.Component {
         let addModalClose = () => this.setState({ addModalShow: false })
         return (
             <div className="main-container">
-                <NavBar loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.user}/>
+                <NavBar loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.user} logOutHandler={this.logOutHandler} />
 
                 <Route path="/listings" render={() => <ListingContainer />}/>
                 <Route path="/favorites" render={() => <FavoriteCard />}/>
@@ -90,4 +90,4 @@ class MainContainer extends React.Component {
     }
 }
 
-export default MainContainer
+export default withRouter(MainContainer)
