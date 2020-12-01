@@ -1,8 +1,5 @@
 import React from 'react'
-import MenuItems from '../component/MenuItems'
 import NavBar from '../component/NavBar'
-import {Button, ButtonToolbar} from 'react-bootstrap'
-import InstrumentModal from '../component/InstrumentModal'
 import ListingContainer from './ListingContainer'
 import { Route, withRouter } from 'react-router-dom'
 import FavoriteCard from '../component/FavoriteCard'
@@ -11,7 +8,6 @@ import ListedInstrumentCard from '../component/ListedInstrumentCard'
 class MainContainer extends React.Component {
 
     state = {
-        addModalShow: false,
         user: null
     }
 
@@ -25,7 +21,7 @@ class MainContainer extends React.Component {
             .then(resp => resp.json())
             .then(data => this.setState({ user: data.user }))
         } else {
-            this.props.history.push("/listings")
+            // this.props.history.push("/listings")
         }
     }
 
@@ -52,10 +48,9 @@ class MainContainer extends React.Component {
             body: JSON.stringify({ user: userInfo}),
         })
         .then(response => response.json())
-        .then(console.log)
         .then(data => {
             localStorage.setItem("token", data.jwt)
-            this.setState({ user: data.user }, () => this.props.history.push("/listings"))
+            this.setState({ user: data.user }, () => this.props.history.push(""))
         })
     }
 
@@ -74,7 +69,6 @@ class MainContainer extends React.Component {
     }
 
     render() {
-        let addModalClose = () => this.setState({ addModalShow: false })
         return (
             <div className="main-container">
                 <NavBar loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.user} logOutHandler={this.logOutHandler} />
@@ -83,8 +77,6 @@ class MainContainer extends React.Component {
                 <Route path="/favorites" render={() => <FavoriteCard />}/>
                 <Route path="/listed-instruments" render={() => <ListedInstrumentCard />}/>
 
-                <Button variant='primary' onClick={() => this.setState({addModalShow: true})}>Add Listing</Button>
-                <InstrumentModal show={this.state.addModalShow} onHide={addModalClose} />
             </div>
         )
     }
