@@ -18,8 +18,13 @@ export default class InstrumentModal extends React.Component{
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body >
-                        <div className="container">
-                            add form field
+                        <div className="form container">
+                            <Form>
+                                <Form.Group>
+                                    <Form.Label>Instrument Type</Form.Label>
+                                    <Form.Control placeholder="e.g: Guitar"/>
+                                </Form.Group>
+                            </Form>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>

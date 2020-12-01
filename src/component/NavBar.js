@@ -24,6 +24,17 @@ class Navbar extends Component {
         this.setState({loginClick: !this.state.loginClick})
     }
 
+    renderButtons = () => {
+        return (
+            <>
+                <Button onClick={this.handleSignupClick}>Sign Up</Button>
+                {this.state.signupClick ? <Signup signupHandler={this.props.signupHandler} /> : null}
+                <Button onClick={this.handleLoginClick}>Login</Button>
+                {this.state.loginClick ? <Login loginHandler={this.props.loginHandler} /> : null}
+            </>
+        )
+    }
+
     render() {
         return(
             <nav className="NavbarItems">
@@ -38,13 +49,12 @@ class Navbar extends Component {
                         )
                     })}
                 </ul>
-                <Button onClick={this.handleSignupClick}>Sign Up</Button>
-                {this.state.signupClick ? <Signup signupHandler={this.props.signupHandler} /> : null}
-                <Button onClick={this.handleLoginClick}>Login</Button>
-                {this.state.loginClick ? <Login loginHandler={this.props.loginHandler} /> : null}
+                {this.props.user ? <Button onClick={this.props.logOutHandler}>Log Out</Button> : this.renderButtons()}
+                
             </nav>
         )
     }
 }
 
 export default Navbar
+
