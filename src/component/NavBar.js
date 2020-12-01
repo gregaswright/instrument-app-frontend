@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { MenuItems } from "./MenuItems"
 import { Button } from "./Button"
 import Signup from "./Signup"
+import Login from "./Login"
 import './NavBar.css'
 
 class Navbar extends Component {
     state = { 
         barsClick: false,
-        signupClick: false
+        signupClick: false,
+        loginClick: false
     }
 
     handleClick = () => {
@@ -16,6 +18,10 @@ class Navbar extends Component {
 
     handleSignupClick = () => {
         this.setState({signupClick: !this.state.signupClick})
+    }
+
+    handleLoginClick = () => {
+        this.setState({loginClick: !this.state.loginClick})
     }
 
     render() {
@@ -33,7 +39,9 @@ class Navbar extends Component {
                     })}
                 </ul>
                 <Button onClick={this.handleSignupClick}>Sign Up</Button>
-                {this.state.signupClick ? <Signup signupHandler={this.props.signupHandler}/> : null}
+                {this.state.signupClick ? <Signup signupHandler={this.props.signupHandler} /> : null}
+                <Button onClick={this.handleLoginClick}>Login</Button>
+                {this.state.loginClick ? <Login loginHandler={this.props.loginHandler} /> : null}
             </nav>
         )
     }

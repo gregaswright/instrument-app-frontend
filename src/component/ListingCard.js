@@ -19,6 +19,7 @@ export default class ListingCard extends React.Component {
                         <div className="age">Age: {this.props.age}</div>
                         <div className="used?">{this.props.used ? "Used" : "New"}</div>
                         <div className="price">Price: {this.props.price}</div>
+                        <div className="username">Person Selling: {this.props.username}</div>
                     </span>
                 </div>
                 <br />
