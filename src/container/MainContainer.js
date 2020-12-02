@@ -3,7 +3,6 @@ import NavBar from '../component/NavBar'
 import ListingContainer from './ListingContainer'
 import { Route, withRouter } from 'react-router-dom'
 import FavoriteCard from '../component/FavoriteCard'
-import ListedInstrumentCard from '../component/ListedInstrumentCard'
 import ListedInstrumentContainer from './ListedInstrumentContainer'
 
 class MainContainer extends React.Component {
@@ -106,7 +105,6 @@ class MainContainer extends React.Component {
     }
 
     render() {
-        console.log(this.state.user)
         return (
             <div className="main-container">
                 <NavBar loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.user} logOutHandler={this.logOutHandler} />
