@@ -50,6 +50,7 @@ class Navbar extends Component {
     }
 
     render() {
+        console.log(this.props.user.length)
         return(
             <nav className="NavbarItems">
                 <h1 className="navbar-logo">Instruments<i className="fas fa-music"></i></h1>
@@ -63,7 +64,7 @@ class Navbar extends Component {
                     )
                 })}
                 </ul>
-                { this.props.user ? <Button onClick={this.props.logOutHandler}>Log Out</Button> : this.renderButtons() }
+                { this.props.user.length === 0 ? this.renderButtons() : <Button onClick={this.props.logOutHandler}>Log Out</Button>}
                 
             </nav>
         )
