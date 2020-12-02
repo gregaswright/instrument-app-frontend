@@ -4,6 +4,7 @@ import ListingContainer from './ListingContainer'
 import { Route, withRouter } from 'react-router-dom'
 import FavoriteCard from '../component/FavoriteCard'
 import ListedInstrumentCard from '../component/ListedInstrumentCard'
+import ListedInstrumentContainer from './ListedInstrumentContainer'
 
 class MainContainer extends React.Component {
 
@@ -104,10 +105,6 @@ class MainContainer extends React.Component {
 
     }
 
-    renderListedInstruments = () => {
-
-    }
-
     render() {
         console.log(this.state.user)
         return (
@@ -116,7 +113,7 @@ class MainContainer extends React.Component {
 
                 <Route path="/listings" render={() => <ListingContainer addToCartHandler={this.addToCartHandler} user={this.state.user}/>}/>
                 <Route path="/favorites" render={() => <FavoriteCard />}/>
-                <Route path="/listed-instruments" render={() => <ListedInstrumentCard />}/>
+                <Route path="/listed-instruments" render={() => <ListedInstrumentContainer user={this.state.user} />}/>
 
             </div>
         )
