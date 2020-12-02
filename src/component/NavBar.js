@@ -9,7 +9,7 @@ class Navbar extends Component {
     state = { 
         barsClick: false,
         signupClick: false,
-        loginClick: false
+        loginClick: false,
     }
 
     handleClick = () => {
@@ -35,15 +35,15 @@ class Navbar extends Component {
         )
     }
 
-    renderNavItems = () => {
+    renderNavItems() {
         MenuItems.map((item, index) => {
-            return (
-                <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
+            return(
+                    <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
             )
         })
     }
 
-    renderSingleNavItem = () => {
+    renderSingleNavItem() {
         return(
             <li><a className={MenuItems[0].cName} href={MenuItems[0].url}>{MenuItems[0].title}</a></li>
         )
@@ -57,11 +57,11 @@ class Navbar extends Component {
                     <i className={this.state.barsClick ? 'fas fa-times' : 'fas fa-bars'}></i>
                 </div>
                 <ul className={this.state.barsClick ? 'nav-menu active' : 'nav-menu'}>
-                    {MenuItems.map((item, index) => {
-                        return (
-                            <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
-                        )
-                    })}
+                {MenuItems.map((item, index) => {
+                    return(
+                        <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
+                    )
+                })}
                 </ul>
                 { this.props.user ? <Button onClick={this.props.logOutHandler}>Log Out</Button> : this.renderButtons() }
                 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Modal, Button } from 'react-bootstrap'
 import { Form, Segment } from 'semantic-ui-react'
 
@@ -9,14 +9,36 @@ const options = [
 
 export default class InstrumentModal extends React.Component{
 
-    state = {}
+    state = {
+        instrument_type: '', 
+        brand: '', 
+        used: '', 
+        weight: '', 
+        age: '', 
+        price: '', 
+        history: '',
+        submittedInstrument_Type: '', 
+        submittedBrand: '', 
+        submittedUsed: '', 
+        submittedWeight: '', 
+        submittedAge: '', 
+        submittedPrice: '', 
+        submittedHistory: ''
+    }
+
+    handleChange = (e, {name, value}) => {
+        this.setState({[name]: value});
+    }
 
     handleSubmit = () => {
-        this.setState({ instrument_type: '', brand: '', used: '', weight: '', age: '', price: '', history: '' })
+        const { instrument_type, brand, used, weight, age, price, history } = this.state
+
+        this.setState({ submittedInstrument_Type: instrument_type, submittedBrand: brand, submittedUsed: used, submittedWeight: weight, submittedAge: age, submittedPrice: price, submittedHistory: history })
         console.log(this.state)
     }
 
     render() {
+        const { instrument_type, brand, used, weight, age, price, history, submittedInstrument_Type, submittedBrand, submittedUsed, submittedWeight, submittedAge, submittedPrice, submittedHistory } = this.state
         return (
             <div>
                 <Modal
@@ -25,7 +47,7 @@ export default class InstrumentModal extends React.Component{
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                 >
-                    <Modal.Header closeButton>
+                    <Modal.Header>
                         <Modal.Title id="contained-modal-title-vcenter">
                         </Modal.Title>
                     </Modal.Header>
@@ -34,21 +56,23 @@ export default class InstrumentModal extends React.Component{
                             <Segment inverted>
                             <Form inverted onSubmit={this.handleSubmit}>
                                 <Form.Group widths='equal'>
-                                    <Form.Input fluid label='Instrument Type' placeholder='e.g. Guitar' />
-                                    <Form.Input fluid label='Brand' placeholder='e.g. Fender' />
+                                    <Form.Input name='instrument_type' value={instrument_type} fluid label='Instrument Type' placeholder='e.g. Guitar' />
+                                    <Form.Input name='brand' value={brand} fluid label='Brand' placeholder='e.g. Fender' />
                                     <Form.Select
                                         fluid
                                         label='Used/New'
                                         options={options}
                                         placeholder=''
+                                        name="used"
+                                        value={used} 
                                     />
                                 </Form.Group>
                                 <Form.Group widths='equal'>
-                                    <Form.Input fluid label='Weight' placeholder='Pounds' />
-                                    <Form.Input fluid label='Age' placeholder='Years' />
-                                    <Form.Input fluid label='Price' placeholder='$0.00' />
+                                    <Form.Input name='weight' value={weight} fluid label='Weight' placeholder='Pounds' />
+                                    <Form.Input name='age' value={age} fluid label='Age' placeholder='Years' />
+                                    <Form.Input name='price' value={price} fluid label='Price' placeholder='$0.00' />
                                 </Form.Group>
-                                <Form.TextArea label='History' placeholder='Tell us more about the background of the instrument...' />
+                                <Form.TextArea name='history' value={history} label='History' placeholder='Tell us more about the background of the instrument...' />
                                 <Form.Button content='Submit'>Submit</Form.Button>
                             </Form>
                             </Segment>

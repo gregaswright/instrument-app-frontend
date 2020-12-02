@@ -4,11 +4,12 @@ import ListingContainer from './ListingContainer'
 import { Route, withRouter } from 'react-router-dom'
 import FavoriteCard from '../component/FavoriteCard'
 import ListedInstrumentCard from '../component/ListedInstrumentCard'
+import ListedInstrumentContainer from './ListedInstrumentContainer'
 
 class MainContainer extends React.Component {
 
     state = {
-        user: null
+        user: null,
     }
 
     componentDidMount() {
@@ -21,7 +22,7 @@ class MainContainer extends React.Component {
             .then(resp => resp.json())
             .then(data => this.setState({ user: data.user }))
         } else {
-            // this.props.history.push("/listings")
+            this.props.history.push("/listings")
         }
     }
 
@@ -64,18 +65,15 @@ class MainContainer extends React.Component {
 
     }
 
-    renderListedInstruments = () => {
-
-    }
-
     render() {
+        console.log(this.state.api)
         return (
             <div className="main-container">
                 <NavBar loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.user} logOutHandler={this.logOutHandler} />
 
                 <Route path="/listings" render={() => <ListingContainer />}/>
                 <Route path="/favorites" render={() => <FavoriteCard />}/>
-                <Route path="/listed-instruments" render={() => <ListedInstrumentCard />}/>
+                <Route path="/listed-instruments" render={() => <ListedInstrumentContainer user={this.state.user} />}/>
 
             </div>
         )

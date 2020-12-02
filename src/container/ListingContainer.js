@@ -2,9 +2,10 @@ import React from 'react'
 import { Card } from 'semantic-ui-react'
 import ListingCard from '../component/ListingCard'
 
+
 export default class ListingContainer extends React.Component {
     state = {
-        api: []
+        api: [],
     }
 
     componentDidMount(){
@@ -30,9 +31,11 @@ export default class ListingContainer extends React.Component {
 
     render() {
         return(
-            <Card.Group itemsPerRow={2}>
-                {this.renderListing()}
-            </Card.Group>
+            <>
+                <Card.Group itemsPerRow={2}>
+                    {this.renderListing()}
+                </Card.Group>
+            </>
         )
     }
 }
