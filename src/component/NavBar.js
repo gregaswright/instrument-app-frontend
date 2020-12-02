@@ -63,7 +63,7 @@ class Navbar extends Component {
                     )
                 })}
                 </ul>
-                { this.props.user ? <Button onClick={this.props.logOutHandler}>Log Out</Button> : this.renderButtons() }
+                { this.props.user.length === 0 ? this.renderButtons() : <Button onClick={this.props.logOutHandler}>Log Out</Button>}
                 
             </nav>
         )
