@@ -20,7 +20,7 @@ export default class ListedInstrumentCard extends React.Component{
                         <div className="age">Age: {this.props.age}</div>
                         <div className="used?">{this.props.used ? "Used" : "New"}</div>
                         <div className="price">Price: {this.props.price}</div>
-                        <div className="username">Person Selling: {this.props.username}</div>
+                        <div className="username">You Have Listed This Instrument</div>
                     </span>
                 </div>
                 <br />

@@ -106,7 +106,6 @@ class MainContainer extends React.Component {
     }
 
     render() {
-        console.log(this.state.user)
         return (
             <div className="main-container">
                 <NavBar loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.user} logOutHandler={this.logOutHandler} />

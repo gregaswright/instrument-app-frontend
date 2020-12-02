@@ -17,23 +17,35 @@ export default class ListedInstrumentContainer extends React.Component {
             .then(data => this.setState({ api: data}))
     }
 
+    handleSubmit = (listingObj) => {
+        const hardData = {...listingObj, user_id: this.props.user.id, in_cart: false, user: this.props.user}
+        fetch("http://localhost:3000/api/v1/listings/", {
+            method: "Post",
+            headers: {
+                "Content-Type": "application/json",
+                "Accepts": "application/json"
+            },
+            body: JSON.stringify(hardData)
+        })
+        .then(r => r.json())
+        .then(newListing => this.setState({ api: [...this.state.api, newListing] }))
+        .catch(console.log)
+    }
+
     renderListedInstruments() {
-        this.state.api.map(listing => { 
-            if (listing.user.username === this.props.user.username)
-                return <ListedInstrumentCard 
-                    key={listing.id}
-                    brand={listing.brand}
-                    instrumentType={listing.instrument_type}
-                    history={listing.history}
-                    weight={listing.weight}
-                    age={listing.age}
-                    used={listing.used}
-                    price={listing.price}
-                    img={listing.img}
-                    username={listing.user.username}
-                />
-            
-        })  
+        let filteredListingArray = this.state.api.filter(listing => listing.user_id === this.props.user.id)
+        return filteredListingArray.map(listing => <ListedInstrumentCard 
+            key={listing.id}
+            brand={listing.brand}
+            instrumentType={listing.instrument_type}
+            history={listing.history}
+            weight={listing.weight}
+            age={listing.age}
+            used={listing.used}
+            price={listing.price}
+            img={listing.img}
+            username={listing.user.username}
+            />) 
     }
 
     render() {
@@ -41,7 +53,7 @@ export default class ListedInstrumentContainer extends React.Component {
         return (
             <>
             <Button variant='primary' onClick={() => this.setState({addModalShow: true})}>Add Listing</Button>
-            <InstrumentModal show={this.state.addModalShow} onHide={addModalClose} />
+            <InstrumentModal show={this.state.addModalShow} onHide={addModalClose} handleSubmit={this.handleSubmit} />
             <Card.Group itemsPerRow={2}>
                 {this.renderListedInstruments()}
             </Card.Group>
