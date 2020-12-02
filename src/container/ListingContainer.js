@@ -14,7 +14,7 @@ export default class ListingContainer extends React.Component {
     }
 
     renderListing = () => {
-        let filteredListingArray = this.state.api.filter(listing => listing.user_id != this.props.user.id)
+        let filteredListingArrayByUser = this.state.api.filter(listing => listing.user_id != this.props.user.id)
         return filteredListingArray.map(listing => <ListingCard key={listing.id} listingObj = {listing} addToCartHandler={this.props.addToCartHandler} />)
     }
 
