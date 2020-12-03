@@ -14,7 +14,7 @@ export default class CartCard extends React.Component {
     render() {
         console.log(this.props.itemObj.id)
         return (
-            <Card>
+            <Card fluid color="black" centered>
             <div>
                 <div className="image">
                     <img src="" alt="img" />
@@ -38,5 +38,4 @@ export default class CartCard extends React.Component {
             </Card>
         )
     }
-   
 }
