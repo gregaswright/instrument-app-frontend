@@ -15,7 +15,8 @@ export default class InstrumentModal extends React.Component{
         used: null, 
         weight: '', 
         age: '', 
-        price: '', 
+        price: '',
+        img: '',
         history: '',
     }
 
@@ -24,7 +25,7 @@ export default class InstrumentModal extends React.Component{
     }
 
     render() {
-        const { instrument_type, brand, used, weight, age, price, history } = this.state
+        const { instrument_type, brand, used, weight, age, price, img, history } = this.state
         return (
             <div>
                 <Modal
@@ -42,6 +43,7 @@ export default class InstrumentModal extends React.Component{
                             <Segment inverted>
                             <Form inverted onSubmit={(e) => {
                                 this.props.handleSubmit(this.state)
+                                this.props.onHide()
                             }}>
                                 <Form.Group widths='equal'>
                                     <Form.Input onChange={this.handleChange} name='instrument_type' value={instrument_type} fluid label='Instrument Type' placeholder='e.g. Guitar' />
@@ -60,6 +62,7 @@ export default class InstrumentModal extends React.Component{
                                     <Form.Input onChange={this.handleChange} name='weight' value={weight} fluid label='Weight' placeholder='Pounds' />
                                     <Form.Input onChange={this.handleChange} name='age' value={age} fluid label='Age' placeholder='Years' />
                                     <Form.Input onChange={this.handleChange} name='price' value={price} fluid label='Price' placeholder='$0.00' />
+                                    <Form.Input onChange={this.handleChange} name='img' value={img} fluid label='Image' placeholder='Enter an image url' />
                                 </Form.Group>
                                 <Form.TextArea onChange={this.handleChange} name='history' value={history} label='History' placeholder='Tell us more about the background of the instrument...' />
                                 <Form.Button content='Submit'>Submit</Form.Button>

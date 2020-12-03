@@ -14,14 +14,41 @@ export default class ListingContainer extends React.Component {
             .then(data => this.setState({ api: data}))
     }
 
+    
+    inCartHandler = ( listingId) => {
+        console.log( listingId)
+        fetch(`http://localhost:3000/api/v1/listings/${listingId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accepts': 'application/json'
+            },
+            body: JSON.stringify({
+                listing: {
+                    in_cart: true
+                }
+            }),
+        })
+        .then(response => response.json())
+        .then(() => {
+            let copiedApi= [...this.state.api]
+            let index = copiedApi.findIndex(listingObj => listingObj.id === listingId)
+            copiedApi.splice(index, 1)
+            this.setState({ api: copiedApi})
+        })
+        .catch(console.log)
+    }
+    
     renderListing = () => {
-        let filteredListingArray = this.state.api.filter(listing => listing.user_id != this.props.user.id)
-        return filteredListingArray.map(listing => <ListingCard key={listing.id} listingObj = {listing} addToCartHandler={this.props.addToCartHandler} />)
+        let filterByCart = this.state.api.filter(listings => listings.in_cart === false)
+        let filteredByListingArray = filterByCart.filter(listing => listing.user_id != this.props.user.id)
+        return filteredByListingArray.map(listing => <ListingCard key={listing.id} listingObj = {listing} addToCartHandler={this.props.addToCartHandler } inCartHandler={this.inCartHandler} />)
     }
 
     render() {
         return(
             <>
+                <h1>All Current Listings</h1>
                 <Card.Group itemsPerRow={2}>
                     {this.renderListing()}
                 </Card.Group>
