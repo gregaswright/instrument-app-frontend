@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
+import './ListingCard.css'
 
 export default class ListingCard extends React.Component {
 
@@ -16,10 +17,10 @@ export default class ListingCard extends React.Component {
 
     render() {
         return(
-            <Card>
+            <Card fluid color="black" centered >
             <div>
                 <div className="image">
-                    <img src="" alt="img" />
+                    <img className="crop-img" src={this.props.listingObj.img} alt="img" />
                 </div>
                 <div className="content">
                     <div className="header">{this.props.listingObj.instrument_type}</div>
@@ -31,7 +32,7 @@ export default class ListingCard extends React.Component {
                         <div className="age">Age: {this.props.listingObj.age}</div>
                         <div className="used?">{this.props.listingObj.used ? "Used" : "New"}</div>
                         <div className="price">Price: {this.props.listingObj.price}</div>
-                        <div className="username">Person Selling: {this.props.listingObj.user.username}</div>
+                        {/* <div className="username">Person Selling: {this.props.listingObj.user.username}</div> */}
                         <button onClick={this.localClickHandler}>Add to Cart</button>
                     </span>
                 </div>

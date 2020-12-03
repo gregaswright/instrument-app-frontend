@@ -22,23 +22,22 @@ export default class CartContainer extends React.Component {
     deleteHandler = (itemId) => {
         console.log(itemId)
         fetch(`http://localhost:3000/api/v1/items/${itemId}`, {
-          method: 'DELETE',
-          headers: {
+            method: 'DELETE',
+            headers: {
             'Content-Type': 'application/json',
             'Accepts': 'application/json'
-          },
+            },
         })
         .then(response => response.json())
         .then(() => {
-          let copiedApi= [...this.state.api]
-          let index = copiedApi.findIndex(itemObj => itemObj.id === itemId)
-          copiedApi.splice(index, 1)
-          this.setState({ api: copiedApi})
-      })
-      
-      }
+            let copiedApi= [...this.state.api]
+            let index = copiedApi.findIndex(itemObj => itemObj.id === itemId)
+            copiedApi.splice(index, 1)
+            this.setState({ api: copiedApi})
+        })
+    }
 
-      removeFromCartHandler = ( listingId) => {
+    removeFromCartHandler = ( listingId) => {
         console.log( listingId)
         fetch(`http://localhost:3000/api/v1/listings/${listingId}`, {
             method: 'PATCH',
@@ -58,6 +57,7 @@ export default class CartContainer extends React.Component {
         .catch(console.log)
     }
 
+
     buyListing = (listingId) => {
         fetch(`http://localhost:3000/api/v1/listings/${listingId}`, {
           method: 'DELETE',
@@ -76,6 +76,7 @@ export default class CartContainer extends React.Component {
     }
 
    
+
     render() {
         console.log(this.props)
         return (

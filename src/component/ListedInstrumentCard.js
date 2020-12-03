@@ -1,14 +1,15 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
+import './ListingCard.css'
 
 export default class ListedInstrumentCard extends React.Component{
 
     render() {
         return (
-            <Card>
+            <Card fluid color="black" centered className="complete-card">
             <div>
                 <div className="image">
-                    <img src="" alt="img" />
+                    <img className="crop-img" src={this.props.img} alt="img" />
                 </div>
                 <div className="content">
                     <div className="header">{this.props.instrumentType}</div>

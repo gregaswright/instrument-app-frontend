@@ -28,7 +28,7 @@ export default class CartCard extends React.Component {
     render() {
         console.log(this.props)
         return (
-            <Card>
+            <Card fluid color="black" centered>
             <div>
                 <h3>{this.state.enoughFunds}</h3>
                 <div className="image">
@@ -53,5 +53,4 @@ export default class CartCard extends React.Component {
             </Card>
         )
     }
-   
 }

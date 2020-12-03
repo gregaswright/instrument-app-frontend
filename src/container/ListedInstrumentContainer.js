@@ -14,7 +14,7 @@ export default class ListedInstrumentContainer extends React.Component {
     componentDidMount(){
         fetch('http://localhost:3000/api/v1/listings/')
             .then(r => r.json())
-            .then(data => this.setState({ api: data}))
+            .then(data => this.setState({ api: data }))
     }
 
     handleSubmit = (listingObj) => {
@@ -32,7 +32,7 @@ export default class ListedInstrumentContainer extends React.Component {
         .catch(console.log)
     }
 
-    renderListedInstruments() {
+    renderListedInstruments = () => {
         let filteredListingArray = this.state.api.filter(listing => listing.user_id === this.props.user.id)
         return filteredListingArray.map(listing => <ListedInstrumentCard 
             key={listing.id}
@@ -52,12 +52,12 @@ export default class ListedInstrumentContainer extends React.Component {
         let addModalClose = () => this.setState({ addModalShow: false })
         return (
             <>
+            <h1>My Listings</h1>
             <Button variant='primary' onClick={() => this.setState({addModalShow: true})}>Add Listing</Button>
             <InstrumentModal show={this.state.addModalShow} onHide={addModalClose} handleSubmit={this.handleSubmit} />
             <Card.Group itemsPerRow={2}>
                 {this.renderListedInstruments()}
             </Card.Group>
-
             </>
         )
     }

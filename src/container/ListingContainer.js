@@ -46,9 +46,9 @@ export default class ListingContainer extends React.Component {
     }
 
     render() {
-        console.log(this.renderListing())
         return(
             <>
+                <h1>All Current Listings</h1>
                 <Card.Group itemsPerRow={2}>
                     {this.renderListing()}
                 </Card.Group>

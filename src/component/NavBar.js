@@ -10,6 +10,7 @@ class Navbar extends Component {
         barsClick: false,
         signupClick: false,
         loginClick: false,
+        cart: []
     }
 
     handleClick = () => {
@@ -35,18 +36,20 @@ class Navbar extends Component {
         )
     }
 
-    renderNavItems() {
-        MenuItems.map((item, index) => {
-            return(
-                    <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
-            )
-        })
+    isUser = () => {
+        return this.props.user.length === 0 ? <></> : <li className="welcome-user">Welcome {this.props.user.username}</li>
     }
 
-    renderSingleNavItem() {
-        return(
-            <li><a className={MenuItems[0].cName} href={MenuItems[0].url}>{MenuItems[0].title}</a></li>
-        )
+    componentDidMount(){
+        fetch("http://localhost:3000/api/v1/carts")
+            .then(r => r.json())
+            .then(data => this.setState({cart: data}))
+    }
+
+    showCartNum = () => {
+        this.state.cart.map((cart, index) => {
+            return cart.user_id === this.props.user.id ? <>s</> : <>s</>
+        })
     }
 
     render() {
@@ -58,7 +61,13 @@ class Navbar extends Component {
                     <i className={this.state.barsClick ? 'fas fa-times' : 'fas fa-bars'}></i>
                 </div>
                 <ul className={this.state.barsClick ? 'nav-menu active' : 'nav-menu'}>
+                {this.isUser()}
                 {MenuItems.map((item, index) => {
+                    if(item.title === "Cart"){
+                        return(
+                        <li key={index}><a className={item.cName} href={item.url}>{item.title}{this.showCartNum}</a></li>
+                        )
+                    }
                     return(
                         <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
                     )
