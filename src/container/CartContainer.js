@@ -16,7 +16,7 @@ export default class CartContainer extends React.Component {
     }
 
     renderListing = () => {
-        return this.state.api.map(item => <CartCard key={item.id} itemObj = {item} deleteHandler = {this.deleteHandler} removeFromCartHandler={this.removeFromCartHandler}/>)
+        return this.state.api.map(item => <CartCard key={item.id} itemObj = {item} deleteHandler = {this.deleteHandler} removeFromCartHandler={this.removeFromCartHandler} user={this.props.user} subtractFromWalletHandler={this.props.subtractFromWalletHandler} buyListing={this.buyListing}/>)
     }
 
     deleteHandler = (itemId) => {
@@ -57,8 +57,28 @@ export default class CartContainer extends React.Component {
         .catch(console.log)
     }
 
+
+    buyListing = (listingId) => {
+        fetch(`http://localhost:3000/api/v1/listings/${listingId}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accepts': 'application/json'
+          },
+        })
+        .then(response => response.json())
+        .then(() => {
+          let copiedApi= [...this.state.api]
+          let index = copiedApi.findIndex(listingObj => listingObj.id === listingId)
+          copiedApi.splice(index, 1)
+          this.setState({ api: copiedApi})
+      })
+    }
+
+   
+
     render() {
-        console.log(this.renderListing())
+        console.log(this.props)
         return (
             <>
             <h1>My Cart</h1>

@@ -4,6 +4,7 @@ import ListingContainer from './ListingContainer'
 import { Route, withRouter } from 'react-router-dom'
 import FavoriteCard from '../component/FavoriteCard'
 import ListedInstrumentContainer from './ListedInstrumentContainer'
+import Wallet from '../component/Wallet'
 
 import CartContainer from '../container/CartContainer'
 
@@ -99,15 +100,61 @@ class MainContainer extends React.Component {
         })
     }
 
+    addToWalletHandler = (amount) => {
+            let newWallet = this.state.user.wallet + amount
+            fetch(`http://localhost:3000/api/v1/users/${this.state.user.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accepts': 'application/json'
+                },
+                body: JSON.stringify({
+                    user: {
+                        wallet: newWallet
+                    }
+                }),
+            })
+            .then(response => response.json())
+            .then(() => {
+                let copiedUser = this.state.user
+                copiedUser.wallet = newWallet
+                this.setState({ user: copiedUser})
+            })
+            .catch(console.log)
+        }
+
+    
+
+    subtractFromWalletHandler = (amount) => {
+        let newWallet = this.state.user.wallet - amount
+        fetch(`http://localhost:3000/api/v1/users/${this.state.user.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accepts': 'application/json'
+            },
+            body: JSON.stringify({
+                 user: {
+                    wallet: newWallet
+                }
+            }),
+        })
+        .then(response => response.json())
+        .then(() => {
+            let copiedUser = this.state.user
+            copiedUser.wallet = newWallet
+            this.setState({ user: copiedUser})
+        })
+        .catch(console.log)
+    }
+    
+
     logOutHandler = () => {
         localStorage.removeItem("token")
         this.props.history.push("/listings")
         this.setState ({user: []})
     }
 
-    renderFavorite = () => {
-
-    }
 
     render() {
         return (
@@ -118,8 +165,8 @@ class MainContainer extends React.Component {
                 <Route path="/favorites" render={() => <FavoriteCard />}/>
 
                 <Route path="/listed-instruments" render={() => <ListedInstrumentContainer user={this.state.user} />}/>
-                <Route path="/cart" render={() => <CartContainer />}/>
-
+                <Route path="/cart" render={() => <CartContainer user={this.state.user} subtractFromWalletHandler={this.subtractFromWalletHandler}/>}/>
+                <Route path="/wallet" render={() => <Wallet user={this.state.user} addToWalletHandler= {this.addToWalletHandler}/>}/>
 
             </div>
         )

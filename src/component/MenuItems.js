@@ -18,5 +18,10 @@ export const MenuItems = [
         title: "Cart",
         url: "/cart",
         cName: "nav-links"
+    },
+    {
+        title: "Add to Wallet",
+        url: "/wallet",
+        cName: "nav-links"
     }
 ]

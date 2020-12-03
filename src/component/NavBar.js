@@ -53,6 +53,7 @@ class Navbar extends Component {
     }
 
     render() {
+        console.log(this.props.user)
         return(
             <nav className="NavbarItems">
                 <h1 className="navbar-logo">Instruments<i className="fas fa-music"></i></h1>
@@ -71,6 +72,7 @@ class Navbar extends Component {
                         <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
                     )
                 })}
+                <h3>My Wallet: {this.props.user.wallet}$</h3>
                 </ul>
                 { this.props.user.length === 0 ? this.renderButtons() : <Button onClick={this.props.logOutHandler}>Log Out</Button>}
                 
