@@ -3,10 +3,16 @@ import { Card } from 'semantic-ui-react'
 
 export default class ListingCard extends React.Component {
 
+    
+
     localClickHandler = () => {
+       
+        this.props.inCartHandler(this.props.listingObj.id)
+        
         this.props.addToCartHandler(this.props.listingObj.id)
-        console.log(this.props.listingObj)
     }
+
+   
 
     render() {
         return(
