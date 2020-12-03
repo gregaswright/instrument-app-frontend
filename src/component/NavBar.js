@@ -50,7 +50,6 @@ class Navbar extends Component {
     }
 
     render() {
-        console.log(this.props.user.length)
         return(
             <nav className="NavbarItems">
                 <h1 className="navbar-logo">Instruments<i className="fas fa-music"></i></h1>

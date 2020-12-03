@@ -3,9 +3,10 @@ import NavBar from '../component/NavBar'
 import ListingContainer from './ListingContainer'
 import { Route, withRouter } from 'react-router-dom'
 import FavoriteCard from '../component/FavoriteCard'
-import ListedInstrumentCard from '../component/ListedInstrumentCard'
 import ListedInstrumentContainer from './ListedInstrumentContainer'
+
 import CartContainer from '../container/CartContainer'
+
 
 class MainContainer extends React.Component {
 
@@ -109,15 +110,16 @@ class MainContainer extends React.Component {
     }
 
     render() {
-        console.log(this.state.user)
         return (
             <div className="main-container">
                 <NavBar loginHandler={this.loginHandler} signupHandler={this.signupHandler} user={this.state.user} logOutHandler={this.logOutHandler} />
 
                 <Route path="/listings" render={() => <ListingContainer addToCartHandler={this.addToCartHandler} user={this.state.user}/>}/>
                 <Route path="/favorites" render={() => <FavoriteCard />}/>
+
                 <Route path="/listed-instruments" render={() => <ListedInstrumentContainer user={this.state.user} />}/>
                 <Route path="/cart" render={() => <CartContainer />}/>
+
 
             </div>
         )
