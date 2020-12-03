@@ -5,6 +5,7 @@ import { Route, withRouter } from 'react-router-dom'
 import FavoriteCard from '../component/FavoriteCard'
 import ListedInstrumentCard from '../component/ListedInstrumentCard'
 import ListedInstrumentContainer from './ListedInstrumentContainer'
+import CartContainer from '../container/CartContainer'
 
 class MainContainer extends React.Component {
 
@@ -79,6 +80,8 @@ class MainContainer extends React.Component {
         .then(console.log)
     }
 
+    
+
     loginHandler = (userInfo) => {
         fetch('http://localhost:3000/api/v1/login', {
             method: 'POST',
@@ -114,6 +117,7 @@ class MainContainer extends React.Component {
                 <Route path="/listings" render={() => <ListingContainer addToCartHandler={this.addToCartHandler} user={this.state.user}/>}/>
                 <Route path="/favorites" render={() => <FavoriteCard />}/>
                 <Route path="/listed-instruments" render={() => <ListedInstrumentContainer user={this.state.user} />}/>
+                <Route path="/cart" render={() => <CartContainer />}/>
 
             </div>
         )
