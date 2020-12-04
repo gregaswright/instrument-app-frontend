@@ -13,11 +13,18 @@
     margin-left: 2rem;
 }
 
+.wallet {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
 .navbar-logo {
     color: #fff;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
+    justify-self: start;
 }
 
 .fa-music {

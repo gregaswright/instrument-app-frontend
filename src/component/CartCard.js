@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
+import './ListingCard.css'
 
 export default class CartCard extends React.Component {
 
@@ -15,7 +16,7 @@ export default class CartCard extends React.Component {
 
     localPurchaseHandler = () => {
         if (this.props.user.wallet >= this.props.itemObj.listing.price) {
-           
+        
             this.props.subtractFromWalletHandler(this.props.itemObj.listing.price)
             this.props.buyListing(this.props.itemObj.listing.id) 
         } else if (this.props.user.wallet < this.props.itemObj.listing.price) {
@@ -26,13 +27,13 @@ export default class CartCard extends React.Component {
 
 
     render() {
-        console.log(this.props)
+        console.log(this.props.itemObj)
         return (
             <Card fluid color="black" centered>
             <div>
                 <h3>{this.state.enoughFunds}</h3>
                 <div className="image">
-                    <img src="" alt="img" />
+                    <img className="crop-img" src={this.props.itemObj.listing.img} alt="img" />
                 </div>
                 <div className="content">
                     <div className="header">{this.props.itemObj.listing.brand}</div>
@@ -40,8 +41,8 @@ export default class CartCard extends React.Component {
                 <div className="extra content">
                     <span>
                         <div className="history">History: {this.props.itemObj.listing.history}</div>
-                        <div className="weight">Weight: {this.props.itemObj.listing.history}</div>
-                        <div className="age">Age: {this.props.itemObj.listing.history}</div>
+                        <div className="weight">Weight: {this.props.itemObj.listing.weight}</div>
+                        <div className="age">Age: {this.props.itemObj.listing.age}</div>
                         <div className="used?">{this.props.itemObj.listing.used ? "Used" : "New"}</div>
                         <div className="price">Price: {this.props.itemObj.listing.price}</div>
                         <button onClick={this.localRemoveFromCart}>Remove From Cart</button>

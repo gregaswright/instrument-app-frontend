@@ -3,6 +3,7 @@ import ListedInstrumentCard from '../component/ListedInstrumentCard'
 import { Card } from 'semantic-ui-react'
 import InstrumentModal from '../component/InstrumentModal'
 import {Button} from 'react-bootstrap'
+import '../component/ListingCard.css'
 
 export default class ListedInstrumentContainer extends React.Component {
 
@@ -55,9 +56,11 @@ export default class ListedInstrumentContainer extends React.Component {
             <h1>My Listings</h1>
             <Button variant='primary' onClick={() => this.setState({addModalShow: true})}>Add Listing</Button>
             <InstrumentModal show={this.state.addModalShow} onHide={addModalClose} handleSubmit={this.handleSubmit} />
+            <div className="listing-container">
             <Card.Group itemsPerRow={2}>
                 {this.renderListedInstruments()}
             </Card.Group>
+            </div>
             </>
         )
     }

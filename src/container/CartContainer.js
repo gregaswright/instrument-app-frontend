@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
 import CartCard from '../component/CartCard'
+import '../component/ListingCard.css'
 
 
 export default class CartContainer extends React.Component {
@@ -82,10 +83,11 @@ export default class CartContainer extends React.Component {
         return (
             <>
             <h1>My Cart</h1>
-            
+            <div className="listing-container">
             <Card.Group itemsPerRow={2}>
                 {this.renderListing()}
             </Card.Group>
+            </div>
             </>
         
         )
