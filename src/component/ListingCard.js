@@ -31,9 +31,9 @@ export default class ListingCard extends React.Component {
                         <div className="weight">Weight: {this.props.listingObj.weight}</div>
                         <div className="age">Age: {this.props.listingObj.age}</div>
                         <div className="used?">{this.props.listingObj.used ? "Used" : "New"}</div>
-                        <div className="price">Price: {this.props.listingObj.price}</div>
-                        {/* <div className="username">Person Selling: {this.props.listingObj.user.username}</div> */}
-                        <button onClick={this.localClickHandler}>Add to Cart</button>
+                        <div className="price">Price: {this.props.listingObj.price}$</div>
+                        <div className="username">Person Selling: {this.props.listingObj.user.username}</div>
+                        {this.props.user.length == 0 ? <div></div> : <button onClick={this.localClickHandler}>Add to Cart</button>}
                     </span>
                 </div>
                 <br />

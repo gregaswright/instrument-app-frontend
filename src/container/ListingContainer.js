@@ -44,7 +44,7 @@ export default class ListingContainer extends React.Component {
     renderListing = () => {
         let filterByCart = this.state.api.filter(listings => listings.in_cart === false)
         let filteredByListingArray = filterByCart.filter(listing => listing.user_id != this.props.user.id)
-        return filteredByListingArray.map(listing => <ListingCard key={listing.id} listingObj = {listing} addToCartHandler={this.props.addToCartHandler } inCartHandler={this.inCartHandler} />)
+        return filteredByListingArray.map(listing => <ListingCard key={listing.id} listingObj = {listing} addToCartHandler={this.props.addToCartHandler } inCartHandler={this.inCartHandler} user={this.props.user}/>)
     }
 
     render() {

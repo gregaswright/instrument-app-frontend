@@ -31,7 +31,7 @@ export default class CartCard extends React.Component {
         return (
             <Card fluid color="black" centered>
             <div>
-                <h3>{this.state.enoughFunds}</h3>
+                <h3 >{this.state.enoughFunds}</h3>
                 <div className="image">
                     <img className="crop-img" src={this.props.itemObj.listing.img} alt="img" />
                 </div>
@@ -44,7 +44,7 @@ export default class CartCard extends React.Component {
                         <div className="weight">Weight: {this.props.itemObj.listing.weight}</div>
                         <div className="age">Age: {this.props.itemObj.listing.age}</div>
                         <div className="used?">{this.props.itemObj.listing.used ? "Used" : "New"}</div>
-                        <div className="price">Price: {this.props.itemObj.listing.price}</div>
+                        <div className="price">Price: {this.props.itemObj.listing.price}$</div>
                         <button onClick={this.localRemoveFromCart}>Remove From Cart</button>
                         <button onClick={this.localPurchaseHandler}>Purchase</button>
                     </span>

@@ -56,13 +56,18 @@ class Navbar extends Component {
         console.log(this.props.user)
         return(
             <nav className="NavbarItems">
-                <h1 className="navbar-logo">Instruments<i className="fas fa-music"></i></h1>
+                <h1 className="navbar-logo">Instruments Basement<i className="fas fa-music"></i></h1>
                 <div className="menu-icon" onClick={this.handleClick}>
                     <i className={this.state.barsClick ? 'fas fa-times' : 'fas fa-bars'}></i>
                 </div>
                 <ul className={this.state.barsClick ? 'nav-menu active' : 'nav-menu'}>
                 {this.isUser()}
-                {MenuItems.map((item, index) => {
+                <li key={1}><a className={"nav-links"} href={"/listings"}>All Listings</a></li>
+                {this.props.user == 0 ? <div></div> : <li key={2}><a className={"nav-links"} href={"/listed-instruments"}>My Listed Instruments</a></li>}
+                {this.props.user == 0 ? <div></div> : <li key={3}><a className={"nav-links"} href={"/cart"}>Cart</a></li>}
+                {this.props.user == 0 ? <div></div> :<li key={4}><a className={"nav-links"} href={"/wallet"}>My Wallet: {this.props.user.wallet}$</a></li>}
+                
+                {/* {MenuItems.map((item, index) => {
                     if(item.title === "Cart"){
                         return(
                         <li key={index}><a className={item.cName} href={item.url}>{item.title}{this.showCartNum}</a></li>
@@ -71,8 +76,7 @@ class Navbar extends Component {
                     return(
                         <li key={index}><a className={item.cName} href={item.url}>{item.title}</a></li>
                     )
-                })}
-                <li className="wallet">My Wallet: {this.props.user.wallet}</li>
+                })} */}
                 </ul>
                 { this.props.user.length === 0 ? this.renderButtons() : <Button onClick={this.props.logOutHandler}>Log Out</Button>}
                 
